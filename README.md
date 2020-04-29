@@ -13,4 +13,11 @@ Next steps
   - Rob to adapt interarrival times so approx right number but at random times throughout the day!
   - Ideally want to know time to transiton between beds (e.g. V -> O2 and O2 -> V)
   - Wrap up into Shiny Function and deploy online for hospitals to use.
-  
+ 
+ 
+Authors:
+Tazeen Tahsina (University of Sheffield)
+Robert Smith (University of Sheffield)
+
+Reviewed by:
+(?) P.S or S.B or M.S. (?)
