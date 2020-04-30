@@ -11,3 +11,20 @@ fun_needs_V <- function() {
   return(c(out));
   
 }
+
+# function to get the time can survive without ventilation (in hours)
+get_t_nV_D <- function(){
+  
+  out <- t_nV_D
+  
+  return(c(out))
+}
+
+# function to get the time can survive without O2 (in hours)
+
+get_t_nO2_D <- function(){
+  
+  out <- t_nO2_D
+  
+  return(c(out))
+}
