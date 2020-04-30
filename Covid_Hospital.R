@@ -2,12 +2,12 @@
 rm(list = ls())
 set.seed(1000)
 
-library(simmer)   # R simmer package
-library(dplyr)    # allowing pipes
-library(miceadds) # this library has the source all function in (should be in base-R really)
-library(truncnorm) # loads the truncnorm package
+library(simmer)      # R simmer package
+library(dplyr)       # allowing pipes
+library(miceadds)    # this library has the source all function in (should be in base-R really)
+library(truncnorm)   # loads the truncnorm package
 library(simmer.plot) # produces plots using ggplot
-library(ggplot2) # for plots
+library(ggplot2)     # for plots
 
 # source all R files.
 source.all("R")
