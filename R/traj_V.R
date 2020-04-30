@@ -26,7 +26,11 @@ traj_V <- trajectory(name = "traj_V") %>%
                            min = t_V_q1,
                            max = t_V_q3)) %>%
   # note finished
-  log_("I am out of O2+V") %>% 
+  log_("I am out of O2+V") %>%
+  
+  # set attibute as to whether the individual has died or not.
+  set_attribute(keys = "dead_or_recovered", 
+                values = function() fun_dora(ventilated = get_attribute(env, "needs_V"))) %>% 
   
   # O2+V no longer needed
   release("O2+V", 1)
