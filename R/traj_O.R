@@ -1,5 +1,3 @@
-# TRAJECTORIES
-
 # TRAJECTORY O
 
 traj_O <- trajectory(name = "traj_02") %>%
@@ -10,8 +8,8 @@ traj_O <- trajectory(name = "traj_02") %>%
   log_("I am in O2") %>%
   
   timeout(function() runif(n = 1,
-                           min =  t_O2,
-                           max = t_O2)) %>%
+                           min =  t_O2_q1,
+                           max = t_O2_q3)) %>%
   
   log_("I am out of O2") %>% 
   

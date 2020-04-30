@@ -1,72 +1,33 @@
+# setup #
 rm(list = ls())
+set.seed(100)
 
-library(simmer)
+library(simmer)   # R simmer package
+library(dplyr)    # allowing pipes
+library(miceadds) # this library has the source all function in (should be in base-R really)
+library(truncnorm)
 
-set.seed(101)
-
-# function to determine whether individual needs ventilator
-fun_needs_V <- function() {
-  
-  # Determine the responder status using a random number
-  out <- ifelse(test = runif(1) < prop_V,
-                    yes = 1,
-                    no = 2)
-  
-  return(c(out));
-  
-}
-
-# TRAJECTORY O
-
-traj_O <- trajectory(name = "traj_02") %>%
-  
-  ## add an intake activity 
-  seize("O2", 1) %>%
-  
-  log_("I am in O2") %>%
-  
-  timeout(function() runif(n = 1,
-                           min =  t_O2,
-                           max = t_O2)) %>%
-  
-  log_("I am out of O2") %>% 
-  
-  release("O2", 1)
-
-
-
-
-# TRAJECTORY v
-
-traj_V <- trajectory(name = "traj_02+V") %>%
-  
-  seize("O2+V", 1) %>%
-  
-  log_("I am in O2+V") %>%
-  
-  timeout(function() runif(n = 1,
-                           min = t_V,
-                           max = t_V)) %>%
-  # note finished
-  log_("I am out of O2+V") %>% 
-  
-  release("O2+V", 1)
-
-
+# source all R files.
+source.all("R")
 
 # set parameters
-n_O2 = 10  # number of oxygen beds
-n_O2V = 5  # number of oxygen and ventilator beds
-prop_V = 6/20 # proportion of those entering ICU who will need ventilation
-int_arr = 24/20 # interval between arrival times (hours)
-t_V = 5*24 # time in ventilation bed
-t_O2 = 3*24 # time in O2 bed
-
+n_pat_day = 20
+n_O2 = 10       # number of oxygen beds
+n_O2V = 5       # number of oxygen and ventilator beds
+prop_V = 6/20   # proportion of those entering ICU who will need ventilation
+int_arr_mean = 24/n_pat_day # mean interval between arrival times (hours)
+t_V_q1 = 3*24   # time in ventilation bed, lower bound
+t_V_q3 = 11*24  # time in ventilation bed, upper bound
+t_O2_q1= 3*24   # time in O2 bed, lower bound
+t_O2_q3 = 11*24 # time in O2 bed, upper bound
 
 # create an environment
 env <- simmer("SuperDuperSim")
 
-# create a patient trajectory
+#-------------------------------#
+#   CREATE PATIENT TRAJECTORY   #
+#-------------------------------#
+
 patient <- trajectory("patients' path") %>%
   
   # set the start time the patient arrived at
@@ -87,19 +48,34 @@ patient <- trajectory("patients' path") %>%
    traj_O)
     
   
+#--------------------------#
+#    UPDATE ENVIRONMENT    #
+#--------------------------#
 
-  
 env %>%
   add_resource("O2", n_O2) %>%
   add_resource("O2+V", n_O2V) %>%
   add_generator("patient",
                 patient,
-                function() runif(n = 1,
-                                 min = int_arr,
-                                 max = int_arr))
+                function() rtruncnorm(a = 0,
+                                      b = 10, 
+                                      n = 1,
+                                      mean = int_arr_mean,
+                                      sd = int_arr_mean/10))
 
+#--------------------------#
+#       RUN SIMULATION     #
+#--------------------------#
 
 env %>%
   reset() %>%
-  run(until = 240) %>%
+  run(until = 300) %>%
   now()
+
+#--------------------------#
+#     ANALYSE RESULTS      #
+#--------------------------#
+
+df_results <- env %>% get_mon_arrivals(ongoing = T)
+
+df_results %>% arrange(start_time)
