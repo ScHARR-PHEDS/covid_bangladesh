@@ -1,12 +1,8 @@
 # setup #
 rm(list = ls())
 
-library(simmer)      # R simmer package
-library(dplyr)       # allowing pipes
-library(miceadds)    # this library has the source all function in (should be in base-R really)
-library(truncnorm)   # loads the truncnorm package
-library(simmer.plot) # produces plots using ggplot
-library(ggplot2)     # for plots
+# load packages
+pacman::p_load(simmer,simmer.plot,dplyr,miceadds,truncnorm,ggplot2,parallel)
 
 # source all R files.
 source.all("R")
@@ -95,7 +91,7 @@ envs <- mclapply(
 #     ANALYSE RESULTS      #
 #--------------------------#
 
-  plot(x = get_mon_resources(env), 
+plot(x = get_mon_resources(env), 
        metric = "usage", 
        names = c("O2", "O2+V"), 
        items = "server")
