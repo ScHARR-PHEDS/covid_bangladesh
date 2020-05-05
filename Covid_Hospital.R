@@ -2,7 +2,8 @@
 rm(list = ls())
 
 # load packages
-pacman::p_load(simmer,simmer.plot,dplyr,miceadds,truncnorm,ggplot2,parallel)
+pacman::p_load(simmer,simmer.plot,dplyr,miceadds,
+               truncnorm,ggplot2,parallel,data.table)
 
 # source all R files.
 source.all("R")
@@ -69,6 +70,8 @@ env %>%
   # run the simulation until 100 days:
   run(until = 2400)
 
+saveRDS(object = env,
+        file = "outputs/single_result.rda")
 
 #--------------------------#
 #         RUN PSA          #
@@ -86,17 +89,36 @@ envs <- mclapply(
   }
 )
 
+saveRDS(object = envs,
+        file = "outputs/psa_results.rda")
 
---------------------------#
+# end of model
+rm(list = ls())
+
+
+
+
+
+
+#--------------------------#
 #     ANALYSE RESULTS      #
 #--------------------------#
+ggsave(plot = get_cum_resource_plot(path = "outputs/psa_results.rda"),
+       device = "png",
+       width = 7,
+       height = 7,
+       filename = "outputs/cum_resource_use.png")
 
+ 
+# GET SINGLE RESOURCE USE PLOT
+env <- readRDS(file = "outputs/single_result.rda")
 plot(x = get_mon_resources(env), 
        metric = "usage", 
        names = c("O2", "O2+V"), 
        items = "server")
 
 # PLOT TIME SPENT IN SYSTEM - REMEMBER PEOPLE DIE IF NOT SEEN
+envs <- readRDS(file = "outputs/psa_results.rda")
 ggsave(plot = get_duration(),
        device = "png",
        width = 7,
