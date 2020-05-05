@@ -61,7 +61,7 @@ env <- simmer("SuperDuperSim") %>%
                   ))
 
 #--------------------------#
-#       RUN SIMULATION     #
+#    RUN SIMULATION ONCE   #
 #--------------------------#
 
 n_iterations <- 100
@@ -73,32 +73,32 @@ env %>%
   # run the simulation until 100 days:
   run(until = 2400)
 
-library(parallel)
-
-# lots of runs 
-envs <- mclapply(1:n_iterations, 
-                 
-  function(i) {
-  env %>%
-    #make sure the model is reset to start:
-    reset() %>%
-    # run the simulation until 100 days:
-    run(until = 2400) %>% 
-    # need wrap for mclapply
-    wrap()
-
-  }, mc.set.seed=FALSE)
-
 
 #--------------------------#
+#         RUN PSA          #
+#--------------------------#
+
+envs <- mclapply(
+  X = 1:n_iterations,
+  FUN = function(i) {
+    env %>%
+      #make sure the model is reset to start:
+      reset() %>%
+      # run the simulation until 100 days:
+      run(1000) %>%
+      wrap()
+  }
+)
+
+
+--------------------------#
 #     ANALYSE RESULTS      #
 #--------------------------#
 
-
-plot(x = get_mon_resources(env), 
-     metric = "usage", 
-     names = c("O2", "O2+V"), 
-     items = "server")
+  plot(x = get_mon_resources(env), 
+       metric = "usage", 
+       names = c("O2", "O2+V"), 
+       items = "server")
 
 # PLOT TIME SPENT IN SYSTEM - REMEMBER PEOPLE DIE IF NOT SEEN
 ggsave(plot = get_duration(),
