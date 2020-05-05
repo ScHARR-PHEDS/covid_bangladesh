@@ -56,6 +56,9 @@ The simmer code can be found in the R folder.
 Preliminary results suggest a large numeber of ventilators are necessary:
 
 ![PLOT 1](https://github.com/RobertASmith/covid_bangladesh/blob/master/outputs/resource_use.png)
+The cumulative amount of resource used is substantial:
+
+![PLOT 1](https://github.com/RobertASmith/covid_bangladesh/blob/master/outputs/cum_resource_use.png)
 
 
 ### Next steps
