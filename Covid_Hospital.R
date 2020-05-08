@@ -3,13 +3,17 @@ rm(list = ls())
 
 # load packages
 pacman::p_load(simmer,simmer.plot,dplyr,miceadds,
-               truncnorm,ggplot2,parallel,data.table)
+               truncnorm,ggplot2,parallel,data.table, 
+               DiagrammeR,DiagrammeRsvg,rsvg)
 
 # source all R files.
 source.all("R")
 
 # get necessary parameters
 get_params()
+
+# create visualisation
+plot_concept_model()
 
 #-------------------------------#
 #   CREATE PATIENT TRAJECTORY   #

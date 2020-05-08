@@ -2,6 +2,8 @@
 
 Super simple to start with:
 
+![PLOT 1](https://github.com/RobertASmith/covid_bangladesh/blob/master/outputs/concept_model.png)
+
 A person arrives at hospital, they are triaged to need either O2 or 'O2 and ventilation'.
  
 They remain on their 'treatment' until they either recover or die. Patients who need O2 and receive treatment either recover  or die after m hours. Patients who need O2+Vent and receive treatment either recover or die after n hours. 
