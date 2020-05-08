@@ -11,6 +11,9 @@ source.all("R")
 # get necessary parameters
 get_params()
 
+# create visualisation
+plot_concept_model()
+
 #-------------------------------#
 #   CREATE PATIENT TRAJECTORY   #
 #-------------------------------#
