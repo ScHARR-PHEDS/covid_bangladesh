@@ -96,7 +96,7 @@ saveRDS(object = envs,
         file = "outputs/psa_results.rda")
 
 # end of model
-rm(list = ls())
+# rm(list = ls())
 
 
 #--------------------------#
