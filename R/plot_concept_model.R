@@ -10,8 +10,7 @@ graph <- mermaid(
   O2+V-->O2;
   O2-->Dead;
   O2+V-->Dead;
-  O2-->Recovered;
-  O2+V-->Recovered"
+  O2-->Recovered"
 )
 
 return(graph)
