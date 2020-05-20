@@ -1,23 +1,25 @@
-# Discrete event simulation of Covid19 response for Bangladeshi hospitals
+# Discrete event simulation of a hospital responding to added Covid19 pressures: Bangladesh
 
-Super simple to start with:
+This model is currently a very simple model of a hospital in Bangladesh which would like to know how much oxygen it will use and how many ventilators are necessary to manage patients.
+
+The model starts super simple:
+A person arrives at hospital, they are triaged to need either O2 (a bed with oxygen) or 'O2+V' (a bed with oxygen and ventilator).
+Those in O2 can progress to O2+V (bed with oxygen + ventilator), recover, or die.
+Those in O2+V can either recover enough to be moved to an O2 bed (no ventilator needed), or die.
 
 ![PLOT 1](https://github.com/RobertASmith/covid_bangladesh/blob/master/outputs/concept_model.png)
 
-A person arrives at hospital, they are triaged to need either O2 or 'O2 and ventilation'.
+There are a fixed number of beds with O2, and a fixed number of beds with 'O2+V'.
+A certain number of patients arrive at random intervals throughout the day. 
+If a bed is not available for a patient who needs O2 then they die after a certain number of hours. 
+If a bed is not available for a patient who needs o2+Vent then they die after a certain number of hours.
+In the absense of survival curves, a transition probability and an upper and lower duration estimate are used to inform the model.
+The simulation is run with all beds initially empty.
  
-They remain on their 'treatment' until they either recover or die. Patients who need O2 and receive treatment either recover  or die after m hours. Patients who need O2+Vent and receive treatment either recover or die after n hours. 
- 
-There are a fixed number of beds with O2, and a fixed number of beds with 'O2 and ventilation'. 
- 
-A certain number of patients arrive at random intervals throughout the day. If a bed is not available for a patient who needs O2 then they die after a certain number of hours. If a bed is not available for a patient who needs o2+Vent then they die after a certain number of hours.
- 
-The simulation is run with all beds initially empty. It is run for 100 days.
- 
-Where possible the values incorporate heterogeneity, so for example length of stay for O2 has a interquartile range of 3-11, so rather than using 7 for everyone we can assign every person going through the simulation a different length of stay to reflect this heterogeneity. At the moment I have assumed uniform distributions, it would be good to change that.
-
+Where possible the values incorporate heterogeneity. For example length of stay for O2 has a interquartile range of 3-11, so rather than using 7 for everyone we can assign every person going through the simulation a different length of stay to reflect this heterogeneity. At the moment I have assumed uniform distributions, it would be good to change that.
 
 ## Paramters
+
 n_pat_day = 20   # number of patients per day
 
 int_arr_mean = 24/n_pat_day # mean interval between arrival times (hours)
@@ -51,7 +53,7 @@ t_nO2_D_ub = 24      # time to death for those who don't get O2
 
 ## Code
 
-The simmer code can be found in the R folder.
+The simmer code can be found in the [R](https://github.com/ScHARR-PHEDS/covid_bangladesh/tree/master/R) folder.
 
 ## Results
 
