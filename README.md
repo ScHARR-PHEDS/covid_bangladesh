@@ -18,7 +18,15 @@ The simulation is run with all beds initially empty.
  
 Where possible the values incorporate heterogeneity. For example length of stay for O2 has a interquartile range of 3-11, so rather than using 7 for everyone we can assign every person going through the simulation a different length of stay to reflect this heterogeneity. At the moment I have assumed uniform distributions, it would be good to change that.
 
-## Paramters
+## Parameters
+
+| Parameter     | Default Value | Description  |
+| ------------- |:-------------:| :-----|
+| n_pat_day      | 20  | number of patients per day |
+| int_arr_mean      | 24/n_pat_day      |   mean interval between arrival times (hours) |
+| n_O2 | 200      |    number of oxygen beds |
+| n_O2V | 100      |    number of oxygen and ventilator beds |
+
 
 n_pat_day = 20   # number of patients per day
 
