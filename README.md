@@ -22,10 +22,21 @@ Where possible the values incorporate heterogeneity. For example length of stay 
 
 | Parameter     | Default Value | Description  |
 | ------------- |:-------------:| :-----|
-| n_pat_day      | 20  | number of patients per day |
-| int_arr_mean      | 24/n_pat_day      |   mean interval between arrival times (hours) |
-| n_O2 | 200      |    number of oxygen beds |
-| n_O2V | 100      |    number of oxygen and ventilator beds |
+| n_pat_day   | 20  | number of patients per day |
+| int_arr_mean  | 24/n_pat_day   |  mean interval between arrival times (hours) |
+| n_O2 | 200   |    number of oxygen beds |
+| n_O2V | 100   |    number of oxygen and ventilator beds |
+| prop_V | 6/20   |    proportion of those entering ICU who will need ventilation |
+| prob_D_O2 | 0.79   |    prbability of death for those with O2 |
+| n_O2V | 100   |    probability of death for those with Ventilation |
+| n_O2V | 100   |    number of oxygen and ventilator beds |
+| n_O2V | 100   |    number of oxygen and ventilator beds |
+| n_O2V | 100   |    number of oxygen and ventilator beds |
+| n_O2V | 100   |    number of oxygen and ventilator beds |
+| n_O2V | 100   |    number of oxygen and ventilator beds |
+| n_O2V | 100   |    number of oxygen and ventilator beds |
+| n_O2V | 100   |    number of oxygen and ventilator beds |
+
 
 
 n_pat_day = 20   # number of patients per day
