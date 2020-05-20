@@ -3,7 +3,7 @@ rm(list = ls())
 
 # load packages
 pacman::p_load(simmer,simmer.plot,dplyr,miceadds,
-               truncnorm,ggplot2,parallel,data.table)
+               truncnorm,ggplot2,parallel,data.table, DiagrammeR)
 
 # source all R files.
 source.all("R")
