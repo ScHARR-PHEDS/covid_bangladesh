@@ -131,3 +131,12 @@ ggsave(plot = get_resource_use_plot(),
        width = 7,
        height = 7,
        filename = "outputs/resource_use.png")
+
+# date & time
+Sys.time()
+
+# repo
+git2r::repository()
+
+# session info
+sessionInfo()
