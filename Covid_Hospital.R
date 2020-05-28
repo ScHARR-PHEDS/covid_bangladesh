@@ -12,7 +12,7 @@ source.all("R")
 get_params()
 
 # create visualisation
-plot_concept_model()
+#plot_concept_model()
 
 #-------------------------------#
 #   CREATE PATIENT TRAJECTORY   #
